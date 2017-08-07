@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>百度一下</title>
+		<link rel="stylesheet" href="./css/style.css">
+	</head>
+	<body>
+		<div class="main">
+			<div class="main_top">
+				<img src="./images/bd_logo.png" width="270" alt="">
+			</div>
+			<div class="main_bottom">
+				<form action="">
+					<span id="s_kw_wrap" class="bg s_ipt_wr quickdelete-wrap">
+						<span class="soutu-btn"></span>
+						<input type="text" class="s_ipt" name="wd" id="text" maxlength="100" autocomplete="off">
+					</span>
+					<span class="btn_wr s_btn_wr bg" id="s_btn_wr">
+						<input type="submit" value="百度一下" id="su" class="btn self-btn bg s_btn">
+					</span>
+				</form>
+				<ul id="list"></ul>
+			</div>
+		</div>
+		<script type="text/javascript">  
+	                    var txt = document.getElementById("text");  
+	                    var oUl = document.getElementById("list");  
+	                    txt.onkeyup = function(){  
+	                            var val = txt.value;  
+	                            var oScript = document.createElement("script");//动态创建script标签  
+	                            oScript.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+val+"&cb=callback";  
+	                            //添加链接及回调函数  
+	                            document.body.appendChild(oScript);//添加script标签  
+	                            document.body.removeChild(oScript);//删除script标签  
+	                    }  
+	                    //回调函数  
+	                    function callback(data){  
+	                    	   if(data.s.length>0)
+	                    	   {
+		                            var str="";  
+		                            for(var i=0;i<data.s.length;i++){  
+		                                str += "<li><a href=\"https://www.baidu.com/s?wd="+data.s[i]+"\">"+data.s[i]+"</a></li>";  
+		                            }  
+		                            oUl.innerHTML=str;  
+		                            oUl.style.display="block";  
+		                }
+	                    }  
+            	</script> 
+	</body>
+</html>
